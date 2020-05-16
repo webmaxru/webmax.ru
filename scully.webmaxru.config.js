@@ -11,9 +11,5 @@ exports.config = {
                 folder: "./blog"
             }
         },
-    },
-    puppeteerLaunchOptions: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        headless: true
     }
 };
