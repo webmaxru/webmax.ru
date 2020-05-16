@@ -7,6 +7,7 @@ exports.config = {
     routes: {},
     puppeteerLaunchOptions: {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        headless: false
+        headless: false,
+        executablePath: '../node_modules/puppeteer/.local-chromium/linux-650583/chrome-linux/chrome'
     }
 };
