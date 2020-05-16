@@ -11,5 +11,8 @@ exports.config = {
                 folder: "./blog"
             }
         },
+    },
+    puppeteerLaunchOptions: {
+        args: ['--no-sandbox']
     }
 };
