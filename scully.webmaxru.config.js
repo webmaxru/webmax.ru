@@ -14,8 +14,6 @@ exports.config = {
     },
     puppeteerLaunchOptions: {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: '/bin/staticsites/ss-oryx/app-int/node_modules/puppeteer/.local-chromium/linux-722234/chrome-linux/chrome',
-        ignoreDefaultArgs: true,
-        headless: false
+        ignoreDefaultArgs: true
     }
 };
