@@ -27,7 +27,7 @@ jobs:
         app_location: '/' # App source code path
         api_location: 'api' # Api source code path - optional
         app_artifact_location: 'dist/static' # Built app content directory - optional
-        app_build_command: 'npm install && npm run scully'
+        app_build_command: 'npm run build && npm run scully'
         ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
