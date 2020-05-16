@@ -4,9 +4,13 @@ exports.config = {
     projectRoot: "./src",
     projectName: "webmaxru",
     outDir: './dist/static',
-    routes: {},
-    puppeteerLaunchOptions: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        ignoreDefaultArgs: true
-    }
+    routes: {
+        '/blog/:slug': {
+            type: 'contentFolder',
+            slug: {
+                folder: "./blog"
+            }
+        },
+    },
+    puppeteerLaunchOptions: {}
 };
