@@ -12,8 +12,5 @@ exports.config = {
             }
         },
     },
-    puppeteerLaunchOptions: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        ignoreDefaultArgs: true
-    }
+    puppeteerLaunchOptions: {}
 };
