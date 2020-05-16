@@ -6,6 +6,7 @@ exports.config = {
     outDir: './dist/static',
     routes: {},
     puppeteerLaunchOptions: {
-        args: ['--no-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        headless: false
     }
 };
