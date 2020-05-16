@@ -4,5 +4,8 @@ export const config: ScullyConfig = {
   projectName: "webmaxru",
   outDir: './dist/static',
   routes: {
+  },
+  puppeteerLaunchOptions: {
+    args: ['--no-sandbox']
   }
 };

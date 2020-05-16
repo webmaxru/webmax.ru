@@ -4,5 +4,8 @@ exports.config = {
     projectRoot: "./src",
     projectName: "webmaxru",
     outDir: './dist/static',
-    routes: {}
+    routes: {},
+    puppeteerLaunchOptions: {
+        args: ['--no-sandbox']
+    }
 };
