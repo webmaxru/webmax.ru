@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/scss/main.scss"
             ],
             "scripts": []
           },
@@ -119,6 +119,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "webmaxru"
+    }
+  },
+  "defaultProject": "webmaxru",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

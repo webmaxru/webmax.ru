@@ -1,5 +1,51 @@
-<p>home works!</p>
+<article class="post featured">
+  <header class="major">
+    <span class="date">August 15, 2019</span>
 
-<ul>
-  <li *ngFor="let page of links$ | async"><a href="{{ page.route }}">{{ page.title }}</a></li>
-</ul>
+    <h2>
+      <a href="https://aka.ms/pwa-slack">Progressive Web Apps Slack team</a>
+    </h2>
+
+    <p>
+      Join more than PWA 2000 developers
+    </p>
+  </header>
+
+  <a href="https://aka.ms/pwa-slack" class="image main"
+    ><img src="/images/pwa.png" alt=""
+  /></a>
+
+  <ul class="actions">
+    <li>
+      <a href="https://aka.ms/pwa-slack" class="button big">Join</a>
+    </li>
+  </ul>
+</article>
+
+<section class="posts">
+  <article *ngFor="let page of links$ | async">
+    <header>
+      <span class="date">{{ page.date }}</span>
+
+      <h2>
+        <a href="https://hugo-theme-massively.netlify.com/post/post2/">{{
+          page.title
+        }}</a>
+      </h2>
+    </header>
+
+    <a href="{{ page.route }}" class="image fit"
+      ><img src="/images/pwa.png" alt="{{ page.title }}"
+    /></a>
+
+    <p>
+      {{ page.description }}
+    </p>
+
+    <ul class="actions">
+      <li>
+        <a href="{{ page.route }}" class="button">Full Story</a>
+      </li>
+    </ul>
+  </article>
+</section>

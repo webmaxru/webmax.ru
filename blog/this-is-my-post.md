@@ -32,6 +32,8 @@ Another variation of this technique — we do not send any signal from service w
 
 First, let’s say thanks to the Workbox maintainers for the magic precacheAndRoute() method we could use in our own service worker. This method takes care of all the complexity of precaching, version maintaining, fetching updated resources, updating the cache etc. We just pass the object with resources and their hash sums (built by another helper from Workbox family — workbox-build module) and it works. Furthermore, another line of code in the service worker:
 
+<script src="https://gist.github.com/webmaxru/dfdbb0ef02c22c39febf67b2c1b8b41a.js" charset="utf-8"></script>
+
 <iframe src="https://medium.com/media/d2b5f8d9cea0fc194129432d58d2ff81" frameborder=0></iframe>
 
 …and we can receive the signals about the precached resources were updated in our app code — exactly what we need to show the message to our user:
