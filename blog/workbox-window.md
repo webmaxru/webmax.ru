@@ -32,13 +32,11 @@ Another variation of this technique — we do not send any signal from service w
 
 First, let’s say thanks to the Workbox maintainers for the magic precacheAndRoute() method we could use in our own service worker. This method takes care of all the complexity of precaching, version maintaining, fetching updated resources, updating the cache etc. We just pass the object with resources and their hash sums (built by another helper from Workbox family — workbox-build module) and it works. Furthermore, another line of code in the service worker:
 
-<script src="https://gist.github.com/webmaxru/dfdbb0ef02c22c39febf67b2c1b8b41a.js" charset="utf-8"></script>
-
-<iframe src="https://medium.com/media/d2b5f8d9cea0fc194129432d58d2ff81" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/96c380a4c1ba3b02430bfc9bbdc82afd.js" charset="utf-8"></script>
 
 …and we can receive the signals about the precached resources were updated in our app code — exactly what we need to show the message to our user:
 
-<iframe src="https://medium.com/media/662bd0de885bdeada65d7a517d12953c" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/b57d1247826848dc0853b2bba20d2bd6.js" charset="utf-8"></script>
 
 We can even add the same plugin to the resources we cache during runtime to follow their updates if needed.
 
@@ -46,7 +44,7 @@ Why do I tell about the option we use in Workbox 3 in the article about Workbox 
 
 What about the second option — when we rely on the service worker lifecycle events? In v3 we don’t have any helpers to actually register our Workbox-driven service worker in our app code and subscribe to its events. Of course, we always can write this ourselves or use the really nice [register-service-worker](https://github.com/yyx990803/register-service-worker) library by Evan You, then the code in our app could look like:
 
-<iframe src="https://medium.com/media/f63b08641ee42f8bf8cd1bc8a0df62ff" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/7a2ac037e6332fb25ae797e775c347c3.js" charset="utf-8"></script>
 
 But now we have way more powerful, flexible and truly Workbox-native way to achieve it: [workbox-window module](https://developers.google.com/web/tools/workbox/modules/workbox-window). As stated in the documentation, The key features/goals of this module are:
 
@@ -62,7 +60,8 @@ Let’s start at the very beginning. To demo the flow, we need to implement a se
 
 The minimalistic version of the Workbox-powered service worker source file could look like:
 
-<iframe src="https://medium.com/media/bd8cb50f80fa0cf75496032480b34a0c" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/fd6fc919bdc809310235198aa3778ee5.js" charset="utf-8"></script>
+
 > Lines 8 and 9 are important in the context of this article. You will read later why do we need them
 
 Why is this “source file”? Because we have to process it after every build of our application. To be precise — we have to inject the list of resources to precache and their hash sums as a parameter for precacheAndRoute() method (instead of this empty array). To save us from this boring task Workbox has 3 options to choose from: Workbox CLI, Webpack plugin, and Node module. The last one is my choice: it needs neither globally installed CLI nor Webpack configuration file exposed. Installing the [\*workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build)\* module:
@@ -71,11 +70,11 @@ Why is this “source file”? Because we have to process it after every build o
 
 Now the service worker build script:
 
-<iframe src="https://medium.com/media/f542d294be1a982e0d793f881aa48042" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/b5ee66b02de620b5d20f30c2395abf57.js" charset="utf-8"></script>
 
 And the final part — is to add the npm run script combining the build of our app and service worker, one after another:
 
-<iframe src="https://medium.com/media/229954efd2a60569b468512f93cfd9fc" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/7005b7456533bb24eeafab4838362fd5.js" charset="utf-8"></script>
 
 As you might notice, I use an [Angular app](https://github.com/webmaxru/angular-pwa/tree/workbox-v4) in my example (ng build --prod is a build command for it) but everything I describe in that article about Workbox modules and PWA techniques is applicable to any JavaScript application.
 
@@ -85,7 +84,7 @@ After I do npm run build-pwa I see something like
 
 And the service worker in the distribution folder now contains all the info Workbox needs to know about our app:
 
-<iframe src="https://medium.com/media/f59ca710b2d27cf342092c14172c1220" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/736ff2a921ec3be46476d0c29c2303e7.js" charset="utf-8"></script>
 
 It would be the same in Workbox 3. But now the difference starts: let’s register this service worker in our app using _workbox-window_. Installing the module first:
 
@@ -95,7 +94,7 @@ It would be the same in Workbox 3. But now the difference starts: let’s regist
 
 Now in our application code:
 
-<iframe src="https://medium.com/media/e3d09ee55162b7690d5e9b9ebf629eb7" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/1053089061e68642a70b41e09cf3c933.js" charset="utf-8"></script>
 
 Some important things to notice:
 
@@ -105,7 +104,7 @@ Some important things to notice:
 
 Time to run our app in any static http server. I use [serve](https://www.npmjs.com/package/serve):
 
-![Running the PWA](https://cdn-images-1.medium.com/max/4024/1*YD12Vh1zTvbki3UEMXlmKA.png)_Running the PWA_
+![Running the PWA](/assets/blog/1*YD12Vh1zTvbki3UEMXlmKA.png)_Running the PWA_
 
 This is exactly what we expect: the service worker was registered, some files were precached. Now if you shut down the server or check _Offline_ checkbox in DevTools — the app will still be available. Thanks to our Workbox-powered service worker serving the resources from the Cache Storage.
 
@@ -113,11 +112,11 @@ This is exactly what we expect: the service worker was registered, some files we
 
 It’s time to update something in our app. Let’s change the title to _Angular PWA 6_. Build/deploy/serve/refresh the page: you still see _Angular PWA 5_. Hit browser’s refresh button once again — now you see the new title. This was expected and our goal is to give the user a hint that the app was actually updated while they see the older version. One of the listeners exposed by workbox-window called installed will help!
 
-<iframe src="https://medium.com/media/76ae1c6faa99810f47d1fbc7d1a2125e" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/3f91f2b453fdecd042ed5ea018499d9a.js" charset="utf-8"></script>
 
 Now on every application update, we’ll see the prompt:
 
-![Refresh-to-update-version](https://cdn-images-1.medium.com/max/2228/1*_jfyZdcctc2NqCR32_hBtg.png)_Refresh-to-update-version_
+![Refresh-to-update-version](/assets/blog/1*_jfyZdcctc2NqCR32_hBtg.png)_Refresh-to-update-version_
 
 Some notices:
 

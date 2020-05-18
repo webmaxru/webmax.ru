@@ -50,7 +50,7 @@ We start from the very minimal solution, just to check if that works at all. The
 
 The code for Step 1 is below:
 
-<iframe src="https://medium.com/media/82861840f03b88047575f48f9f9bc524" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/7d90146b3a7e3a065855fb275e301e97.js" charset="utf-8"></script>
 
 On the app start, we register a service worker file service-worker.js. Please note that even for this demo I use the best practices for the registration to just emphasize the importance of:
 
@@ -62,9 +62,9 @@ On “Store assets locally” (“_Download_” term does not 100% correctly ref
 
 In our service worker, in addition to utility install and activate events (to simpler track the lifecycle stage), we have only one useful event handler at the moment: backgroundfetchsuccess where we output the registration object of the event. Let’s see it in action! For our example, I download 1,39 GB movie file (to have some seconds to watch the flow) from the same origin using http-server static webserver on Mac OS. _(A reminder: we have to use Chrome Canary M72 to test Background Fetch API)_
 
-<iframe src="https://medium.com/media/5762bd880873ddd8d3f55b1699d5ba8f" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/7ed07310674f00d9b4044422e947eead.js" charset="utf-8"></script>
 
-![We download the file using Background Fetch API](https://cdn-images-1.medium.com/max/2060/1*bqi7gem3j5e5OlfMtht0PQ.gif)_We download the file using Background Fetch API_
+![We download the file using Background Fetch API](/assets/blog/1*bqi7gem3j5e5OlfMtht0PQ.gif)_We download the file using Background Fetch API_
 
 Yes! It works! We see our file downloading in the browser’s bottom bar (where we normally see the regular downloads). So what happens if:
 
@@ -72,13 +72,13 @@ Yes! It works! We see our file downloading in the browser’s bottom bar (where 
 
 - _You close the browser_ (by clicking x button): the closing confirmation will appear. If we confirm — the download will still continue, now the status is on the browser’s icon:
 
-![Chrome is downloading the asset without the window open](https://cdn-images-1.medium.com/max/2000/1*E8YUcIMi4aQ6MM3ZR7P4dw.png)_Chrome is downloading the asset without the window open_
+![Chrome is downloading the asset without the window open](/assets/blog/1*E8YUcIMi4aQ6MM3ZR7P4dw.png)_Chrome is downloading the asset without the window open_
 
 - _You unload the browser from the memory_ (by choosing Quit from the right-click menu): download will stop but will continue after you launch the browser again.
 
 Awesome! We have a download mechanism which is persistent across the app status and browser restarts. We can even Pause/Cancel this transfer:
 
-![Using standard browser download UI to manage background fetches](https://cdn-images-1.medium.com/max/2000/1*fvIWzpTlayP1vcp-zS64Qg.png)_Using standard browser download UI to manage background fetches_
+![Using standard browser download UI to manage background fetches](/assets/blog/1*fvIWzpTlayP1vcp-zS64Qg.png)_Using standard browser download UI to manage background fetches_
 
 There is only one issue: we download this asset to… nowhere! Because it’s up to us — what do we want to do with these bytes received. Time to implement it!
 
@@ -86,7 +86,7 @@ There is only one issue: we download this asset to… nowhere! Because it’s up
 
 We take the sample code from [Background Fetch API proposal repo](https://github.com/WICG/background-fetch) in the simplified form for now. At the same time in our main app let’s add the second asset to download to the same registration of the background fetch — it’s possible according to the spec.
 
-<iframe src="https://medium.com/media/22c4c62d3f9a48d033c7d44f1f522c1e" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/d4a1fc609026831062fce707aa34e88c.js" charset="utf-8"></script>
 
 Let’s split it into steps:
 
@@ -104,17 +104,17 @@ Let’s split it into steps:
 
 The result:
 
-![Downloading two large files](https://cdn-images-1.medium.com/max/2110/1*lz4s8_nwI1wjeaihfrMvZg.gif)_Downloading two large files_
+![Downloading two large files](/assets/blog/1*lz4s8_nwI1wjeaihfrMvZg.gif)_Downloading two large files_
 
 We see how the downloading is beginning and “Usage” chart is updating. During the download time we have our data in “Other” category, then (on cache.put()) it’s moving to the cache. If we open “Cache Storage” section we’ll find these two large files (1,39 GB and 140 MB) there — now we can intercept the requests to these and serve them from the cache!
 
 There is another thing. According to the specification, the browser should show the “Download multiple files” confirmation dialogue like this:
 
-![Native confirmation dialogue](https://cdn-images-1.medium.com/max/2000/1*ygTj-yRzpOuqzjX5V75Fgg.png)_Native confirmation dialogue_
+![Native confirmation dialogue](/assets/blog/1*ygTj-yRzpOuqzjX5V75Fgg.png)_Native confirmation dialogue_
 
 Sometimes it shows up but most of the times it’s not there. I tried to change the origins, reset cache, use different assets in the background fetch registration but was still unable to reproduce the sustainable popping up of this window. Most likely it’s the bug of the current Chrome Canary build. Anyway, I can explain how that works: if you click “Block” you change the setting for “Automatic downloads” for this origin and you see the corresponding icon in the address bar:
 
-![](https://cdn-images-1.medium.com/max/2204/1*tsdEZ2glcpn53pk2jgAuWA.png)
+![](/assets/blog/1*tsdEZ2glcpn53pk2jgAuWA.png)
 
 This is why we have the alert() with the explanation of how to fix this in the catch block of background fetch registration. Most likely the possible error’s cause is exactly this setting.
 
@@ -134,7 +134,7 @@ So _almost_ all works good but looks not very user-friendly: not very informativ
 
 Let’s externalize the JSON with meta-information about the asset set we want to register and add some extra features to our main app and service worker:
 
-<iframe src="https://medium.com/media/15d67d9c1889979882bcdd3ee0731b29" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/dfdbb0ef02c22c39febf67b2c1b8b41a.js" charset="utf-8"></script>
 
 What was added:
 
@@ -144,7 +144,7 @@ What was added:
 
 - _service-worker.js_: both on success and failure of the main operation we update the download indicator with the current status and the _title_ of the background fetch we specified in JSON settings file. Of course, instead of this optional title property we could use background fetch registration ID both for the main app and service worker messages, but this ID is not for the UI (it can be a long auto-generated unique hash-string for example), so it’s a really good idea to have the human-friendly title provided.
 
-![](https://cdn-images-1.medium.com/max/2388/1*QiiKy6y6RBYeO4X9YXkztQ.gif)
+![](/assets/blog/1*QiiKy6y6RBYeO4X9YXkztQ.gif)
 
 Now we have a full control over the texts and user informing. Some notices:
 
@@ -158,7 +158,7 @@ Now, let’s add some more useful handlers to our service worker and experiment 
 
 We had a look only at best scenarios so far when everything works as planned which is not always the case when we deal with network connections. Let’s add more handlers to our service worker to be ready to the variety of possible errors. Again, we’ll use the code from [Background Fetch API proposal repo](https://github.com/WICG/background-fetch) as a foundation.
 
-<iframe src="https://medium.com/media/05fddb323294352b0b5c8896323a3338" frameborder=0></iframe>
+<script src="https://gist.github.com/webmaxru/6c3817fb19c64390ba50287a29711efc.js" charset="utf-8"></script>
 
 What do we expect:
 
@@ -170,7 +170,7 @@ What do we expect:
 
 Demo time! Let’s specify the wrong URL for one of the assets in our set: assets/s01e01.avi (not .mpg):
 
-![](https://cdn-images-1.medium.com/max/2390/1*VE-o1EzCCB5xp2iqvh6RBg.gif)
+![](/assets/blog/1*VE-o1EzCCB5xp2iqvh6RBg.gif)
 
 The background fetch ends up by thebackgroundfetchfail event with the registration.failureReason equal to “_bad-status_”. It’s important that despite the error with a particular asset, we continue our batch with the next asset and have the possibility to cache all our previous successful responses.
 
@@ -182,11 +182,11 @@ My other tries to call different types of errors:
 
 - Shutting server down and starting up again (to mimic the temporarily out-of-service) — doesn’t work well. It resumes the transfer after server goes online but sends backgroundfetchfail with “_bad-status_” very soon. Also, we have non-consistent quota usage numbers:
 
-![Three different values for what has been downloaded](https://cdn-images-1.medium.com/max/3832/1*EYoDOamIjretIZ_SVylAZA.png)_Three different values for what has been downloaded_
+![Three different values for what has been downloaded](/assets/blog/1*EYoDOamIjretIZ_SVylAZA.png)_Three different values for what has been downloaded_
 
 - Two more issues in that scenario. First, the downloading of the second file doesn’t even start (despite the server is alive). And second, “_Content-Length_” shown in Cache explorer confusingly equals to the full file size despite we were able to download this asset only partially:
 
-![And value number four…](https://cdn-images-1.medium.com/max/3692/1*u7xnX7TfQ95z11FHpwB51g.png)_And value number four…_
+![And value number four…](/assets/blog/1*u7xnX7TfQ95z11FHpwB51g.png)_And value number four…_
 
 The above errors give us a chance to cache what could be downloaded successfully. According to the [specification proposal](https://github.com/WICG/background-fetch), the behavior is different for the errors related to the downloadTotal property. Let’s set it equal to _140015339_ — exact size in bytes of our “small” asset (_s01e02.mpg_). After the transfer start, we receive backgroundfetchfail with “_total-download-exceeded_”. This is expected — the _s01e01.mpg_ is larger than this limit. What we don’t expect (but it’s correct according to the spec) — is that even _s01e02.mpg_ will not be cached in that case — the transfer operation aborts immediately on “_total-download-exceeded_” error. We can’t put into the cache even properly sized assets. So if we remove this “incorrect size”-file from the URL array to fetch, _s01e02.mpg_ will land in Cache Storage.
 

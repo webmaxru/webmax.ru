@@ -29,11 +29,11 @@
         <span class="date">{{ page.date }}</span>
 
         <h2>
-          <a href="{{ page.route }}">{{ page.title }}</a>
+          <a href="{{ page.route + '/' }}">{{ page.title }}</a>
         </h2>
       </header>
 
-      <a href="{{ page.route }}" class="image fit"
+      <a href="{{ page.route + '/' }}" class="image fit"
         ><img src="/assets/images/{{ page.image }}" alt="{{ page.title }}"
       /></a>
 
@@ -43,7 +43,7 @@
 
       <ul class="actions">
         <li>
-          <a href="{{ page.route }}" class="button">Full Story</a>
+          <a href="{{ page.route + '/' }}" class="button">Full Story</a>
         </li>
       </ul>
     </article>
