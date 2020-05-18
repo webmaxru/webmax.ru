@@ -1,6 +1,6 @@
 <article class="post featured">
   <header class="major">
-    <span class="date">August 15, 2019</span>
+    <span class="date">May 17, 2020</span>
 
     <h2>
       <a href="https://aka.ms/pwa-slack">Progressive Web Apps Slack team</a>
@@ -12,7 +12,7 @@
   </header>
 
   <a href="https://aka.ms/pwa-slack" class="image main"
-    ><img src="/images/pwa.png" alt=""
+    ><img src="/assets/images/pwa-slack.png" alt=""
   /></a>
 
   <ul class="actions">
@@ -23,29 +23,29 @@
 </article>
 
 <section class="posts">
-  <article *ngFor="let page of links$ | async">
-    <header>
-      <span class="date">{{ page.date }}</span>
+  <ng-template ngFor let-page [ngForOf]="links$ | async">
+    <article *ngIf="page.route !== '/'">
+      <header>
+        <span class="date">{{ page.date }}</span>
 
-      <h2>
-        <a href="https://hugo-theme-massively.netlify.com/post/post2/">{{
-          page.title
-        }}</a>
-      </h2>
-    </header>
+        <h2>
+          <a href="{{ page.route }}">{{ page.title }}</a>
+        </h2>
+      </header>
 
-    <a href="{{ page.route }}" class="image fit"
-      ><img src="/images/pwa.png" alt="{{ page.title }}"
-    /></a>
+      <a href="{{ page.route }}" class="image fit"
+        ><img src="/assets/images/{{ page.image }}" alt="{{ page.title }}"
+      /></a>
 
-    <p>
-      {{ page.description }}
-    </p>
+      <p>
+        {{ page.description }}
+      </p>
 
-    <ul class="actions">
-      <li>
-        <a href="{{ page.route }}" class="button">Full Story</a>
-      </li>
-    </ul>
-  </article>
+      <ul class="actions">
+        <li>
+          <a href="{{ page.route }}" class="button">Full Story</a>
+        </li>
+      </ul>
+    </article>
+  </ng-template>
 </section>

@@ -1,16 +1,16 @@
 ---
-title: 'Workbox 4: Implementing refresh-to-update-version flow using the workbox-window module'
-description: 'blog description'
+title: "Workbox 4: Implementing refresh-to-update-version flow using the workbox-window module"
+description: "Let’s explore this new module to check what will it take to build the well-known “refresh-to-update-version” technique — one of the UX best practice for PWA."
+date: Feb 28, 2019
 published: true
+image: workbox-window.png
 slugs:
-    - first
-
+  - workbox-window
 ---
+
 # Workbox 4: Implementing refresh-to-update-version flow using the workbox-window module
 
-
-
-The next major version of the very popular PWA helper library was just released. Workbox 4 brings [many interesting additions](https://github.com/GoogleChrome/workbox/releases/tag/v4.0.0) to the existing modules and only a [few minor breaking changes](https://developers.google.com/web/tools/workbox/guides/migrations/migrate-from-v3#breaking_changes). Also, it ships one totally new module called [*workbox-window](https://developers.google.com/web/tools/workbox/modules/workbox-window)*, to fulfil the need of developers in a simple and powerful way to register the service worker, to hook into its lifecycle, and to provide a bi-directional communication channel with the app. This is the first module of Workbox to be used in the *window context*, i.e. in our application’s (not service worker’s) code.
+The next major version of the very popular PWA helper library was just released. Workbox 4 brings [many interesting additions](https://github.com/GoogleChrome/workbox/releases/tag/v4.0.0) to the existing modules and only a [few minor breaking changes](https://developers.google.com/web/tools/workbox/guides/migrations/migrate-from-v3#breaking_changes). Also, it ships one totally new module called [\*workbox-window](https://developers.google.com/web/tools/workbox/modules/workbox-window)*, to fulfil the need of developers in a simple and powerful way to register the service worker, to hook into its lifecycle, and to provide a bi-directional communication channel with the app. This is the first module of Workbox to be used in the *window context\*, i.e. in our application’s (not service worker’s) code.
 
 Let’s explore this new module to check what will it take to build the well-known “refresh-to-update-version” technique — one of the UX best practice for PWA. As we use this flow often while building our applications, and Workbox exposes the corresponding tooling now, we just need to find a simple and robust code to build that flow. This article is my try to find that code: minimal and stable. But first, what is this flow I’m talking about?
 
@@ -49,6 +49,7 @@ What about the second option — when we rely on the service worker lifecycle ev
 <iframe src="https://medium.com/media/f63b08641ee42f8bf8cd1bc8a0df62ff" frameborder=0></iframe>
 
 But now we have way more powerful, flexible and truly Workbox-native way to achieve it: [workbox-window module](https://developers.google.com/web/tools/workbox/modules/workbox-window). As stated in the documentation, The key features/goals of this module are:
+
 > To simplify the process of service worker registration and updates by helping developers identify the most critical moments in the service worker lifecycle, and making it easier to respond to those moments.
 > To help prevent developers from making the most common mistakes.
 > To enable easier communication between code running in the service worker and code running in the window.
@@ -64,7 +65,7 @@ The minimalistic version of the Workbox-powered service worker source file could
 <iframe src="https://medium.com/media/bd8cb50f80fa0cf75496032480b34a0c" frameborder=0></iframe>
 > Lines 8 and 9 are important in the context of this article. You will read later why do we need them
 
-Why is this “source file”? Because we have to process it after every build of our application. To be precise — we have to inject the list of resources to precache and their hash sums as a parameter for precacheAndRoute() method (instead of this empty array). To save us from this boring task Workbox has 3 options to choose from: Workbox CLI, Webpack plugin, and Node module. The last one is my choice: it needs neither globally installed CLI nor Webpack configuration file exposed. Installing the [*workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build)* module:
+Why is this “source file”? Because we have to process it after every build of our application. To be precise — we have to inject the list of resources to precache and their hash sums as a parameter for precacheAndRoute() method (instead of this empty array). To save us from this boring task Workbox has 3 options to choose from: Workbox CLI, Webpack plugin, and Node module. The last one is my choice: it needs neither globally installed CLI nor Webpack configuration file exposed. Installing the [\*workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build)\* module:
 
     npm install workbox-build --save-dev
 
@@ -86,9 +87,10 @@ And the service worker in the distribution folder now contains all the info Work
 
 <iframe src="https://medium.com/media/f59ca710b2d27cf342092c14172c1220" frameborder=0></iframe>
 
-It would be the same in Workbox 3. But now the difference starts: let’s register this service worker in our app using *workbox-window*. Installing the module first:
+It would be the same in Workbox 3. But now the difference starts: let’s register this service worker in our app using _workbox-window_. Installing the module first:
 
     npm install workbox-window
+
 > Hint: there are [different scenarios](https://developers.google.com/web/tools/workbox/modules/workbox-window#importing_and_using_workbox-window) of importing/using/bundling this module available.
 
 Now in our application code:
@@ -103,18 +105,19 @@ Some important things to notice:
 
 Time to run our app in any static http server. I use [serve](https://www.npmjs.com/package/serve):
 
-![Running the PWA](https://cdn-images-1.medium.com/max/4024/1*YD12Vh1zTvbki3UEMXlmKA.png)*Running the PWA*
+![Running the PWA](https://cdn-images-1.medium.com/max/4024/1*YD12Vh1zTvbki3UEMXlmKA.png)_Running the PWA_
 
-This is exactly what we expect: the service worker was registered, some files were precached. Now if you shut down the server or check *Offline* checkbox in DevTools — the app will still be available. Thanks to our Workbox-powered service worker serving the resources from the Cache Storage.
-> Hint: to have much more detailed log just set the corresponding logging level in DevTools — see the *Default levels* dropdown in the right bottom corner of the screenshot.
+This is exactly what we expect: the service worker was registered, some files were precached. Now if you shut down the server or check _Offline_ checkbox in DevTools — the app will still be available. Thanks to our Workbox-powered service worker serving the resources from the Cache Storage.
 
-It’s time to update something in our app. Let’s change the title to *Angular PWA 6*. Build/deploy/serve/refresh the page: you still see *Angular PWA 5*. Hit browser’s refresh button once again — now you see the new title. This was expected and our goal is to give the user a hint that the app was actually updated while they see the older version. One of the listeners exposed by workbox-window called installed will help!
+> Hint: to have much more detailed log just set the corresponding logging level in DevTools — see the _Default levels_ dropdown in the right bottom corner of the screenshot.
+
+It’s time to update something in our app. Let’s change the title to _Angular PWA 6_. Build/deploy/serve/refresh the page: you still see _Angular PWA 5_. Hit browser’s refresh button once again — now you see the new title. This was expected and our goal is to give the user a hint that the app was actually updated while they see the older version. One of the listeners exposed by workbox-window called installed will help!
 
 <iframe src="https://medium.com/media/76ae1c6faa99810f47d1fbc7d1a2125e" frameborder=0></iframe>
 
 Now on every application update, we’ll see the prompt:
 
-![Refresh-to-update-version](https://cdn-images-1.medium.com/max/2228/1*_jfyZdcctc2NqCR32_hBtg.png)*Refresh-to-update-version*
+![Refresh-to-update-version](https://cdn-images-1.medium.com/max/2228/1*_jfyZdcctc2NqCR32_hBtg.png)_Refresh-to-update-version_
 
 Some notices:
 

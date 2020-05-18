@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --stats-json",
+    "postbuild": "npm run scully",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -25,6 +26,7 @@
     "@scullyio/ng-lib": "latest",
     "@scullyio/scully": "latest",
     "rxjs": "~6.5.4",
+    "scully-plugin-disable-angular": "^3.1.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

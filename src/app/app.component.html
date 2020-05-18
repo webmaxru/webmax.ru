@@ -1,5 +1,5 @@
 <div id="wrapper" class="fade-in" data-pfn="post" data-ps="6" data-pfp="true">
-  <div id="intro">
+  <div id="intro" *ngIf="router.url === '/'">
     <h1>
       PWA Blog
 
@@ -19,12 +19,12 @@
   </div>
 
   <header id="header">
-    <a href="/" class="logo">PWA Blog</a>
+    <a [routerLink]="['']"  class="logo">PWA Blog by Maxim Salnikov</a>
   </header>
 
   <nav id="nav">
     <ul class="links">
-      <li class="active"><a href="/">Home</a></li>
+      <li class="active"><a [routerLink]="['']">Home</a></li>
 
       <li><a href="/#footer">Contact</a></li>
     </ul>
@@ -65,7 +65,9 @@
 
       <section>
         <h3>Speaker profile</h3>
-        <p><a href="https://sessionize.com/maxim-salnikov/">My tech talks</a></p>
+        <p>
+          <a href="https://sessionize.com/maxim-salnikov/">My tech talks</a>
+        </p>
       </section>
 
       <section>
@@ -113,4 +115,5 @@
   </div>
 
   <a href="#navPanel" id="navPanelToggle">Menu</a>
+  <div class="bg fixed" style="transform: none;"></div>
 </div>
