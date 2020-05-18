@@ -104,7 +104,7 @@ Some important things to notice:
 
 Time to run our app in any static http server. I use [serve](https://www.npmjs.com/package/serve):
 
-![Running the PWA](/assets/blog/1*YD12Vh1zTvbki3UEMXlmKA.png)_Running the PWA_
+![Running the PWA](/assets/blog/1_YD12Vh1zTvbki3UEMXlmKA.png)_Running the PWA_
 
 This is exactly what we expect: the service worker was registered, some files were precached. Now if you shut down the server or check _Offline_ checkbox in DevTools — the app will still be available. Thanks to our Workbox-powered service worker serving the resources from the Cache Storage.
 
@@ -116,7 +116,7 @@ It’s time to update something in our app. Let’s change the title to _Angular
 
 Now on every application update, we’ll see the prompt:
 
-![Refresh-to-update-version](/assets/blog/1*_jfyZdcctc2NqCR32_hBtg.png)_Refresh-to-update-version_
+![Refresh-to-update-version](/assets/blog/1__jfyZdcctc2NqCR32_hBtg.png)_Refresh-to-update-version_
 
 Some notices:
 
