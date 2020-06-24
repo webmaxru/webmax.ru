@@ -3,7 +3,7 @@ title: "My developer past, present, and future. Interview for Kode24."
 description: "I was featured as a Week's Coder of the Norwegian online-magazine for the developers Kode24, and here is my interview to Ole Petter Baugerød Stokke"
 date: Jun 24, 2020
 published: true
-image: maxim-salnikov-me.jpg
+image: maxim-salnikov.jpg
 slugs:
   - kode24-interview
 ---
@@ -24,6 +24,8 @@ https://sessionize.com/maxim-salnikov
 * Favorite music right now: **Røyksopp**
 * Favorite TV-series right now: **Discovery Channel**
 
+![Maxim Salnikov](https://webmax.ru/assets/blog/maxim-salnikov-me.jpg)_Me attending CES expo in Las Vegas_
+
 ## How did you get started with coding? (for example, what is the first thing you remember developing, and where did the road go?)
 
 I believe it's a classic story of the computer geek. I understood that programming is "my thing" during the first lessons of Basic in the school - I was especially excited by the programmatic drawing of the objects. Then I was deeply engaged with Pascal/Delphi (C++ to a lesser extent) in the University (again, in different v-teams I was always responsible for the visual and UI parts of the project). So it was natural for me to immediately become a "webmaster" in the late 90s when I discovered Internet: HTML, CSS, and obligatory JS-powered animated mouse pointer tail :) Approximately at the same time, I built my first commercial projects driven by Apache+PHP+MySQL (LAMP stack).
@@ -42,6 +44,8 @@ Also, I traditionally build and support the websites for the conferences I menti
 
 Right now, I work on the demo of the background services of Progressive Web Apps for my next technical talk.
 
+![My workplace](https://webmax.ru/assets/blog/maxim-salnikov-workplace.jpg)_Delivering a technical session from home_
+
 ## What does a typical workday look like to you “these days”? (are you at the home office, how do regular meetings, work tasks, etc. work)
 
 My work is all about building the strategy and communication. So only the target channel and media changed but not the core. Now, I have meetings with my colleagues, with the local and global community organizers, with the developers who want to learn more about the cloud - from my kitchen or terrace. From the same places, I speak at the conferences worldwide these days - I think the number of my speaker appearances [has only increased](https://twitter.com/webmaxru/status/1273566526940033024) last months!
@@ -53,6 +57,8 @@ My developer's passion is Web and Progressive Web Apps in particular. I scrupulo
 ## What specific tools can't you do without? (for example, specific programs and editors, editor plugins, build tools, database solutions, hosting services, etc.)
 
 VS Code + Azure cloud extensions + "must-have" developer extensions like Prettier, Live Server, Import Cost, Peacock.
+
+![My job](https://webmax.ru/assets/blog/maxim-salnikov-recording.jpg)_In the studio: recording videoshow for the developers_
 
 ## What is the worst thing you can be asked about at work? (for example, tasks you think are tedious, systems you don't like to work on, technologies you think are bad / difficult / tedious, etc.)
 
