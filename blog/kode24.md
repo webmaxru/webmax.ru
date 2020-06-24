@@ -1,12 +1,17 @@
 ---
-title: "My developer past, present, and future. Interview for Kode24."
-description: "I was featured as a Week's Coder of the Norwegian online-magazine for the developers Kode24, and here is my interview to Ole Petter Baugerød Stokke"
+title: "My developer journey, and today's aspirations. Interview for Kode24."
+description: "
+I'm proud to be featured as a Week's Coder of the Norwegian online-magazine for the developers Kode24. Here is the interview I gave to Ole Petter Baugerød Stokke (Editor at Kode24) for the publication."
 date: Jun 24, 2020
 published: true
 image: maxim-salnikov.jpg
 slugs:
   - kode24-interview
 ---
+
+# My developer journey, and today's aspirations. Interview for Kode24.
+
+I'm proud to be featured as a Week's Coder of the Norwegian online-magazine for the developers [Kode24](https://www.kode24.no/ukas-koder/). Here is the interview I gave to Ole Petter Baugerød Stokke (Editor at Kode24) for the publication.
 
 # Quick facts
 
